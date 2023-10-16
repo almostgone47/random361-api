@@ -12,12 +12,31 @@ const locations = [
 ];
 const nouns = ['Cat', 'Dog', 'Bird', 'Elephant', 'Lion', 'Fish'];
 const verbs = ['Running', 'Dancing', 'Playing', 'Partying', 'Sleeping'];
+let apiHits = 0;
+
+// Let Vinnie know he needs to send headers with the following:
+// Authorization: Bearer randgen361
+
+function authenticate(req, res, next) {
+  const authHeader = req.headers.authorization;
+
+  console.log('API Hit: ', (apiHits += 1), 'by: ', req.headers);
+  if (authHeader && authHeader === 'Bearer randgen361') {
+    next();
+  } else {
+    res.status(401).send('Unauthorized');
+  }
+}
 
 function getRandomItem(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-app.get('/rand-stuff', (req, res) => {
+// app.get('/', (req, res) => {
+//   res.json({msg: 'YOU HIT THE TEST API'});
+// });
+
+app.get('/api/rand', authenticate, (req, res) => {
   const response = {
     location: getRandomItem(locations),
     noun: getRandomItem(nouns),

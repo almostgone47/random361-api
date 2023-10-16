@@ -32,9 +32,9 @@ function getRandomItem(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-// app.get('/', (req, res) => {
-//   res.json({msg: 'YOU HIT THE TEST API'});
-// });
+app.get('/', (req, res) => {
+  res.json({msg: 'YOU HIT THE TEST API'});
+});
 
 app.get('/api/rand', authenticate, (req, res) => {
   const response = {

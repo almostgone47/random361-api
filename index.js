@@ -56,7 +56,7 @@ app.post('/', (req, res) => {
   res.status(200).send('Unauthorized');
 });
 
-app.get('/api/rand', authenticate, (req, res) => {
+app.get('/api/rand', (req, res) => {
   const response = {
     location: getRandomItem(locations),
     noun: getRandomItem(nouns),

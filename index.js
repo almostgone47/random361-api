@@ -1,6 +1,20 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  }),
+);
+
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET');
+  next();
+});
 
 const locations = [
   'Boston',
@@ -33,7 +47,12 @@ function getRandomItem(arr) {
 }
 
 app.get('/', (req, res) => {
-  res.json({msg: 'YOU HIT THE TEST API'});
+  res.status(200).json({msg: 'A message from CS361'});
+});
+
+app.post('/', (req, res) => {
+  console.log('Message received: ', req.body);
+  res.status(200).send('Unauthorized');
 });
 
 app.get('/api/rand', authenticate, (req, res) => {

@@ -43,8 +43,13 @@ function authenticate(req, res, next) {
   }
 }
 
-function getRandomItem(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+function getRandomData() {
+  const obj = {
+    location: locations[Math.floor(Math.random() * locations.length)],
+    noun: nouns[Math.floor(Math.random() * nouns.length)],
+    verb: verbs[Math.floor(Math.random() * verbs.length)],
+  };
+  return obj;
 }
 
 app.get('/', (req, res) => {
@@ -57,11 +62,7 @@ app.post('/', (req, res) => {
 });
 
 app.get('/api/rand', (req, res) => {
-  const response = {
-    location: getRandomItem(locations),
-    noun: getRandomItem(nouns),
-    verb: getRandomItem(verbs),
-  };
+  const response = getRandomData();
   res.json(response);
 });
 

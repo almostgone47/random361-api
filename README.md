@@ -6,6 +6,10 @@ This microservice provides randomized selections of locations, nouns, and verbs.
 It is designed for the Dad Joke generator app, which needs random data for
 demonstrating the use of the application.
 
+## UML Sequence Diagram
+
+![Dad Joke App UML Diagram](./umlDiagram.png 'UML Diagram of Dad Joke App')
+
 ## Requesting Data
 
 To request data from the microservice, make an HTTP `GET` request to the
